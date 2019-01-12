@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.eps.dao.ContractDao">
+
+	<select id="get" resultType="com.project.eps.domain.ContractDO">
+		select `id`,`name`,`amount`,`sign_time`,`sign_person`,`effective_start_time`,`effective_end_time`,`service_times`,`service_duration`,`customer_id`,`customer_name`,`contract_size`,`ways`,`ways_number`,`attachment_ids`,`remark`,`status`,`create_time`,`update_time` from eps_contract where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.project.eps.domain.ContractDO">
+		select `id`,`name`,`amount`,`sign_time`,`sign_person`,`effective_start_time`,`effective_end_time`,`service_times`,`service_duration`,`customer_id`,`customer_name`,`contract_size`,`ways`,`ways_number`,`attachment_ids`,`remark`,`status`,`create_time`,`update_time` from eps_contract
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="amount != null and amount != ''"> and amount = #{amount} </if>
+		  		  <if test="signTime != null and signTime != ''"> and sign_time = #{signTime} </if>
+		  		  <if test="signPerson != null and signPerson != ''"> and sign_person = #{signPerson} </if>
+		  		  <if test="effectiveStartTime != null and effectiveStartTime != ''"> and effective_start_time = #{effectiveStartTime} </if>
+		  		  <if test="effectiveEndTime != null and effectiveEndTime != ''"> and effective_end_time = #{effectiveEndTime} </if>
+		  		  <if test="serviceTimes != null and serviceTimes != ''"> and service_times = #{serviceTimes} </if>
+		  		  <if test="serviceDuration != null and serviceDuration != ''"> and service_duration = #{serviceDuration} </if>
+		  		  <if test="customerId != null and customerId != ''"> and customer_id = #{customerId} </if>
+		  		  <if test="customerName != null and customerName != ''"> and customer_name = #{customerName} </if>
+		  		  <if test="contractSize != null and contractSize != ''"> and contract_size = #{contractSize} </if>
+		  		  <if test="ways != null and ways != ''"> and ways = #{ways} </if>
+		  		  <if test="waysNumber != null and waysNumber != ''"> and ways_number = #{waysNumber} </if>
+		  		  <if test="attachmentIds != null and attachmentIds != ''"> and attachment_ids = #{attachmentIds} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eps_contract
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="amount != null and amount != ''"> and amount = #{amount} </if>
+		  		  <if test="signTime != null and signTime != ''"> and sign_time = #{signTime} </if>
+		  		  <if test="signPerson != null and signPerson != ''"> and sign_person = #{signPerson} </if>
+		  		  <if test="effectiveStartTime != null and effectiveStartTime != ''"> and effective_start_time = #{effectiveStartTime} </if>
+		  		  <if test="effectiveEndTime != null and effectiveEndTime != ''"> and effective_end_time = #{effectiveEndTime} </if>
+		  		  <if test="serviceTimes != null and serviceTimes != ''"> and service_times = #{serviceTimes} </if>
+		  		  <if test="serviceDuration != null and serviceDuration != ''"> and service_duration = #{serviceDuration} </if>
+		  		  <if test="customerId != null and customerId != ''"> and customer_id = #{customerId} </if>
+		  		  <if test="customerName != null and customerName != ''"> and customer_name = #{customerName} </if>
+		  		  <if test="contractSize != null and contractSize != ''"> and contract_size = #{contractSize} </if>
+		  		  <if test="ways != null and ways != ''"> and ways = #{ways} </if>
+		  		  <if test="waysNumber != null and waysNumber != ''"> and ways_number = #{waysNumber} </if>
+		  		  <if test="attachmentIds != null and attachmentIds != ''"> and attachment_ids = #{attachmentIds} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.project.eps.domain.ContractDO">
+		insert into eps_contract
+		(
+			`id`, 
+			`name`, 
+			`amount`, 
+			`sign_time`, 
+			`sign_person`, 
+			`effective_start_time`, 
+			`effective_end_time`, 
+			`service_times`, 
+			`service_duration`, 
+			`customer_id`, 
+			`customer_name`, 
+			`contract_size`, 
+			`ways`, 
+			`ways_number`, 
+			`attachment_ids`, 
+			`remark`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{amount}, 
+			#{signTime}, 
+			#{signPerson}, 
+			#{effectiveStartTime}, 
+			#{effectiveEndTime}, 
+			#{serviceTimes}, 
+			#{serviceDuration}, 
+			#{customerId}, 
+			#{customerName}, 
+			#{contractSize}, 
+			#{ways}, 
+			#{waysNumber}, 
+			#{attachmentIds}, 
+			#{remark}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.project.eps.domain.ContractDO">
+		update eps_contract 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="amount != null">`amount` = #{amount}, </if>
+			<if test="signTime != null">`sign_time` = #{signTime}, </if>
+			<if test="signPerson != null">`sign_person` = #{signPerson}, </if>
+			<if test="effectiveStartTime != null">`effective_start_time` = #{effectiveStartTime}, </if>
+			<if test="effectiveEndTime != null">`effective_end_time` = #{effectiveEndTime}, </if>
+			<if test="serviceTimes != null">`service_times` = #{serviceTimes}, </if>
+			<if test="serviceDuration != null">`service_duration` = #{serviceDuration}, </if>
+			<if test="customerId != null">`customer_id` = #{customerId}, </if>
+			<if test="customerName != null">`customer_name` = #{customerName}, </if>
+			<if test="contractSize != null">`contract_size` = #{contractSize}, </if>
+			<if test="ways != null">`ways` = #{ways}, </if>
+			<if test="waysNumber != null">`ways_number` = #{waysNumber}, </if>
+			<if test="attachmentIds != null">`attachment_ids` = #{attachmentIds}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update eps_contract set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update eps_contract set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from eps_contract where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eps_contract where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

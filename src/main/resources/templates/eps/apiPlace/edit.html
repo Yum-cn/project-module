@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${apiPlace.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">API点名称：</label>
+								<div class="col-sm-8">
+									<input id="apiName" name="apiName" th:value="${apiPlace.apiName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">API点地址：</label>
+								<div class="col-sm-8">
+									<input id="apiAddress" name="apiAddress" th:value="${apiPlace.apiAddress}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">经度：</label>
+								<div class="col-sm-8">
+									<input id="longitude" name="longitude" th:value="${apiPlace.longitude}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">纬度：</label>
+								<div class="col-sm-8">
+									<input id="latitude" name="latitude" th:value="${apiPlace.latitude}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">行业类型：</label>
+								<div class="col-sm-8">
+									<input id="industryType" name="industryType" th:value="${apiPlace.industryType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">区域：</label>
+								<div class="col-sm-8">
+									<input id="area" name="area" th:value="${apiPlace.area}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责人：</label>
+								<div class="col-sm-8">
+									<input id="responsiblePerson" name="responsiblePerson" th:value="${apiPlace.responsiblePerson}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责人职位：</label>
+								<div class="col-sm-8">
+									<input id="responsiblePersonJob" name="responsiblePersonJob" th:value="${apiPlace.responsiblePersonJob}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责人联系电话：</label>
+								<div class="col-sm-8">
+									<input id="responsiblePersonPhone" name="responsiblePersonPhone" th:value="${apiPlace.responsiblePersonPhone}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">联系人：</label>
+								<div class="col-sm-8">
+									<input id="contactPerson" name="contactPerson" th:value="${apiPlace.contactPerson}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">联系人联系电话：</label>
+								<div class="col-sm-8">
+									<input id="contactPersonPhone" name="contactPersonPhone" th:value="${apiPlace.contactPersonPhone}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最大功率：</label>
+								<div class="col-sm-8">
+									<input id="maxPower" name="maxPower" th:value="${apiPlace.maxPower}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最小功率：</label>
+								<div class="col-sm-8">
+									<input id="minPower" name="minPower" th:value="${apiPlace.minPower}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最大电流：</label>
+								<div class="col-sm-8">
+									<input id="maxCurrent" name="maxCurrent" th:value="${apiPlace.maxCurrent}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最小电流：</label>
+								<div class="col-sm-8">
+									<input id="minCurrent" name="minCurrent" th:value="${apiPlace.minCurrent}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">电压：</label>
+								<div class="col-sm-8">
+									<input id="voltage" name="voltage" th:value="${apiPlace.voltage}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责电工：</label>
+								<div class="col-sm-8">
+									<input id="electrician" name="electrician" th:value="${apiPlace.electrician}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">电工电话：</label>
+								<div class="col-sm-8">
+									<input id="electricianPhone" name="electricianPhone" th:value="${apiPlace.electricianPhone}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">开户状态（合同维护api点后置为已开户,已开户才可使用）：</label>
+								<div class="col-sm-8">
+									<input id="validStatus" name="validStatus" th:value="${apiPlace.validStatus}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">录入人(后台系统用户信息)：</label>
+								<div class="col-sm-8">
+									<input id="operateUser" name="operateUser" th:value="${apiPlace.operateUser}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">录入人电话(后台系统用户信息)：</label>
+								<div class="col-sm-8">
+									<input id="operatePhone" name="operatePhone" th:value="${apiPlace.operatePhone}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">API服务有效状态(判断该API点是否在合同执行有效期内,此状态需由系统自动更新)：</label>
+								<div class="col-sm-8">
+									<input id="apiStatus" name="apiStatus" th:value="${apiPlace.apiStatus}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">状态：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" th:value="${apiPlace.status}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">入网时间：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${apiPlace.createTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="updateTime" name="updateTime" th:value="${apiPlace.updateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/eps/apiPlace/edit.js">
+	</script>
+</body>
+</html>

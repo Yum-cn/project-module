@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.eps.dao.UserInfoDao">
+
+	<select id="get" resultType="com.project.eps.domain.UserInfoDO">
+		select `id`,`user_id`,`gender`,`age`,`nickname`,`avatar`,`phone`,`longitude`,`latitude`,`name`,`certificate_type`,`certificate_number`,`expiration_date`,`status`,`create_time`,`update_time` from eps_user_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.project.eps.domain.UserInfoDO">
+		select `id`,`user_id`,`gender`,`age`,`nickname`,`avatar`,`phone`,`longitude`,`latitude`,`name`,`certificate_type`,`certificate_number`,`expiration_date`,`status`,`create_time`,`update_time` from eps_user_info
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="gender != null and gender != ''"> and gender = #{gender} </if>
+		  		  <if test="age != null and age != ''"> and age = #{age} </if>
+		  		  <if test="nickname != null and nickname != ''"> and nickname = #{nickname} </if>
+		  		  <if test="avatar != null and avatar != ''"> and avatar = #{avatar} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="longitude != null and longitude != ''"> and longitude = #{longitude} </if>
+		  		  <if test="latitude != null and latitude != ''"> and latitude = #{latitude} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="certificateType != null and certificateType != ''"> and certificate_type = #{certificateType} </if>
+		  		  <if test="certificateNumber != null and certificateNumber != ''"> and certificate_number = #{certificateNumber} </if>
+		  		  <if test="expirationDate != null and expirationDate != ''"> and expiration_date = #{expirationDate} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eps_user_info
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="gender != null and gender != ''"> and gender = #{gender} </if>
+		  		  <if test="age != null and age != ''"> and age = #{age} </if>
+		  		  <if test="nickname != null and nickname != ''"> and nickname = #{nickname} </if>
+		  		  <if test="avatar != null and avatar != ''"> and avatar = #{avatar} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="longitude != null and longitude != ''"> and longitude = #{longitude} </if>
+		  		  <if test="latitude != null and latitude != ''"> and latitude = #{latitude} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="certificateType != null and certificateType != ''"> and certificate_type = #{certificateType} </if>
+		  		  <if test="certificateNumber != null and certificateNumber != ''"> and certificate_number = #{certificateNumber} </if>
+		  		  <if test="expirationDate != null and expirationDate != ''"> and expiration_date = #{expirationDate} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.project.eps.domain.UserInfoDO">
+		insert into eps_user_info
+		(
+			`id`, 
+			`user_id`, 
+			`gender`, 
+			`age`, 
+			`nickname`, 
+			`avatar`, 
+			`phone`, 
+			`longitude`, 
+			`latitude`, 
+			`name`, 
+			`certificate_type`, 
+			`certificate_number`, 
+			`expiration_date`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{gender}, 
+			#{age}, 
+			#{nickname}, 
+			#{avatar}, 
+			#{phone}, 
+			#{longitude}, 
+			#{latitude}, 
+			#{name}, 
+			#{certificateType}, 
+			#{certificateNumber}, 
+			#{expirationDate}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.project.eps.domain.UserInfoDO">
+		update eps_user_info 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="gender != null">`gender` = #{gender}, </if>
+			<if test="age != null">`age` = #{age}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="avatar != null">`avatar` = #{avatar}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="longitude != null">`longitude` = #{longitude}, </if>
+			<if test="latitude != null">`latitude` = #{latitude}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="certificateType != null">`certificate_type` = #{certificateType}, </if>
+			<if test="certificateNumber != null">`certificate_number` = #{certificateNumber}, </if>
+			<if test="expirationDate != null">`expiration_date` = #{expirationDate}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update eps_user_info set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update eps_user_info set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from eps_user_info where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eps_user_info where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.eps.dao.ApiPlaceDao">
+
+	<select id="get" resultType="com.project.eps.domain.ApiPlaceDO">
+		select `id`,`api_name`,`api_address`,`longitude`,`latitude`,`industry_type`,`area`,`responsible_person`,`responsible_person_job`,`responsible_person_phone`,`contact_person`,`contact_person_phone`,`max_power`,`min_power`,`max_current`,`min_current`,`voltage`,`electrician`,`electrician_phone`,`valid_status`,`operate_user`,`operate_phone`,`api_status`,`status`,`create_time`,`update_time` from eps_api_place where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.project.eps.domain.ApiPlaceDO">
+		select `id`,`api_name`,`api_address`,`longitude`,`latitude`,`industry_type`,`area`,`responsible_person`,`responsible_person_job`,`responsible_person_phone`,`contact_person`,`contact_person_phone`,`max_power`,`min_power`,`max_current`,`min_current`,`voltage`,`electrician`,`electrician_phone`,`valid_status`,`operate_user`,`operate_phone`,`api_status`,`status`,`create_time`,`update_time` from eps_api_place
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="apiName != null and apiName != ''"> and api_name = #{apiName} </if>
+		  		  <if test="apiAddress != null and apiAddress != ''"> and api_address = #{apiAddress} </if>
+		  		  <if test="longitude != null and longitude != ''"> and longitude = #{longitude} </if>
+		  		  <if test="latitude != null and latitude != ''"> and latitude = #{latitude} </if>
+		  		  <if test="industryType != null and industryType != ''"> and industry_type = #{industryType} </if>
+		  		  <if test="area != null and area != ''"> and area = #{area} </if>
+		  		  <if test="responsiblePerson != null and responsiblePerson != ''"> and responsible_person = #{responsiblePerson} </if>
+		  		  <if test="responsiblePersonJob != null and responsiblePersonJob != ''"> and responsible_person_job = #{responsiblePersonJob} </if>
+		  		  <if test="responsiblePersonPhone != null and responsiblePersonPhone != ''"> and responsible_person_phone = #{responsiblePersonPhone} </if>
+		  		  <if test="contactPerson != null and contactPerson != ''"> and contact_person = #{contactPerson} </if>
+		  		  <if test="contactPersonPhone != null and contactPersonPhone != ''"> and contact_person_phone = #{contactPersonPhone} </if>
+		  		  <if test="maxPower != null and maxPower != ''"> and max_power = #{maxPower} </if>
+		  		  <if test="minPower != null and minPower != ''"> and min_power = #{minPower} </if>
+		  		  <if test="maxCurrent != null and maxCurrent != ''"> and max_current = #{maxCurrent} </if>
+		  		  <if test="minCurrent != null and minCurrent != ''"> and min_current = #{minCurrent} </if>
+		  		  <if test="voltage != null and voltage != ''"> and voltage = #{voltage} </if>
+		  		  <if test="electrician != null and electrician != ''"> and electrician = #{electrician} </if>
+		  		  <if test="electricianPhone != null and electricianPhone != ''"> and electrician_phone = #{electricianPhone} </if>
+		  		  <if test="validStatus != null and validStatus != ''"> and valid_status = #{validStatus} </if>
+		  		  <if test="operateUser != null and operateUser != ''"> and operate_user = #{operateUser} </if>
+		  		  <if test="operatePhone != null and operatePhone != ''"> and operate_phone = #{operatePhone} </if>
+		  		  <if test="apiStatus != null and apiStatus != ''"> and api_status = #{apiStatus} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eps_api_place
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="apiName != null and apiName != ''"> and api_name = #{apiName} </if>
+		  		  <if test="apiAddress != null and apiAddress != ''"> and api_address = #{apiAddress} </if>
+		  		  <if test="longitude != null and longitude != ''"> and longitude = #{longitude} </if>
+		  		  <if test="latitude != null and latitude != ''"> and latitude = #{latitude} </if>
+		  		  <if test="industryType != null and industryType != ''"> and industry_type = #{industryType} </if>
+		  		  <if test="area != null and area != ''"> and area = #{area} </if>
+		  		  <if test="responsiblePerson != null and responsiblePerson != ''"> and responsible_person = #{responsiblePerson} </if>
+		  		  <if test="responsiblePersonJob != null and responsiblePersonJob != ''"> and responsible_person_job = #{responsiblePersonJob} </if>
+		  		  <if test="responsiblePersonPhone != null and responsiblePersonPhone != ''"> and responsible_person_phone = #{responsiblePersonPhone} </if>
+		  		  <if test="contactPerson != null and contactPerson != ''"> and contact_person = #{contactPerson} </if>
+		  		  <if test="contactPersonPhone != null and contactPersonPhone != ''"> and contact_person_phone = #{contactPersonPhone} </if>
+		  		  <if test="maxPower != null and maxPower != ''"> and max_power = #{maxPower} </if>
+		  		  <if test="minPower != null and minPower != ''"> and min_power = #{minPower} </if>
+		  		  <if test="maxCurrent != null and maxCurrent != ''"> and max_current = #{maxCurrent} </if>
+		  		  <if test="minCurrent != null and minCurrent != ''"> and min_current = #{minCurrent} </if>
+		  		  <if test="voltage != null and voltage != ''"> and voltage = #{voltage} </if>
+		  		  <if test="electrician != null and electrician != ''"> and electrician = #{electrician} </if>
+		  		  <if test="electricianPhone != null and electricianPhone != ''"> and electrician_phone = #{electricianPhone} </if>
+		  		  <if test="validStatus != null and validStatus != ''"> and valid_status = #{validStatus} </if>
+		  		  <if test="operateUser != null and operateUser != ''"> and operate_user = #{operateUser} </if>
+		  		  <if test="operatePhone != null and operatePhone != ''"> and operate_phone = #{operatePhone} </if>
+		  		  <if test="apiStatus != null and apiStatus != ''"> and api_status = #{apiStatus} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.project.eps.domain.ApiPlaceDO">
+		insert into eps_api_place
+		(
+			`id`, 
+			`api_name`, 
+			`api_address`, 
+			`longitude`, 
+			`latitude`, 
+			`industry_type`, 
+			`area`, 
+			`responsible_person`, 
+			`responsible_person_job`, 
+			`responsible_person_phone`, 
+			`contact_person`, 
+			`contact_person_phone`, 
+			`max_power`, 
+			`min_power`, 
+			`max_current`, 
+			`min_current`, 
+			`voltage`, 
+			`electrician`, 
+			`electrician_phone`, 
+			`valid_status`, 
+			`operate_user`, 
+			`operate_phone`, 
+			`api_status`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{apiName}, 
+			#{apiAddress}, 
+			#{longitude}, 
+			#{latitude}, 
+			#{industryType}, 
+			#{area}, 
+			#{responsiblePerson}, 
+			#{responsiblePersonJob}, 
+			#{responsiblePersonPhone}, 
+			#{contactPerson}, 
+			#{contactPersonPhone}, 
+			#{maxPower}, 
+			#{minPower}, 
+			#{maxCurrent}, 
+			#{minCurrent}, 
+			#{voltage}, 
+			#{electrician}, 
+			#{electricianPhone}, 
+			#{validStatus}, 
+			#{operateUser}, 
+			#{operatePhone}, 
+			#{apiStatus}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.project.eps.domain.ApiPlaceDO">
+		update eps_api_place 
+		<set>
+			<if test="apiName != null">`api_name` = #{apiName}, </if>
+			<if test="apiAddress != null">`api_address` = #{apiAddress}, </if>
+			<if test="longitude != null">`longitude` = #{longitude}, </if>
+			<if test="latitude != null">`latitude` = #{latitude}, </if>
+			<if test="industryType != null">`industry_type` = #{industryType}, </if>
+			<if test="area != null">`area` = #{area}, </if>
+			<if test="responsiblePerson != null">`responsible_person` = #{responsiblePerson}, </if>
+			<if test="responsiblePersonJob != null">`responsible_person_job` = #{responsiblePersonJob}, </if>
+			<if test="responsiblePersonPhone != null">`responsible_person_phone` = #{responsiblePersonPhone}, </if>
+			<if test="contactPerson != null">`contact_person` = #{contactPerson}, </if>
+			<if test="contactPersonPhone != null">`contact_person_phone` = #{contactPersonPhone}, </if>
+			<if test="maxPower != null">`max_power` = #{maxPower}, </if>
+			<if test="minPower != null">`min_power` = #{minPower}, </if>
+			<if test="maxCurrent != null">`max_current` = #{maxCurrent}, </if>
+			<if test="minCurrent != null">`min_current` = #{minCurrent}, </if>
+			<if test="voltage != null">`voltage` = #{voltage}, </if>
+			<if test="electrician != null">`electrician` = #{electrician}, </if>
+			<if test="electricianPhone != null">`electrician_phone` = #{electricianPhone}, </if>
+			<if test="validStatus != null">`valid_status` = #{validStatus}, </if>
+			<if test="operateUser != null">`operate_user` = #{operateUser}, </if>
+			<if test="operatePhone != null">`operate_phone` = #{operatePhone}, </if>
+			<if test="apiStatus != null">`api_status` = #{apiStatus}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update eps_api_place set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update eps_api_place set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from eps_api_place where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eps_api_place where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

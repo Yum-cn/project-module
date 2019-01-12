@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.eps.dao.CusotmerDao">
+
+	<select id="get" resultType="com.project.eps.domain.CusotmerDO">
+		select `id`,`name`,`address`,`linkman`,`contact_number`,`industry`,`company_size`,`authentication_tag`,`credentials_url`,`parent_tag`,`contract_ids`,`contract_names`,`user_id`,`status`,`update_time`,`create_time` from eps_cusotmer where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.project.eps.domain.CusotmerDO">
+		select `id`,`name`,`address`,`linkman`,`contact_number`,`industry`,`company_size`,`authentication_tag`,`credentials_url`,`parent_tag`,`contract_ids`,`contract_names`,`user_id`,`status`,`update_time`,`create_time` from eps_cusotmer
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="linkman != null and linkman != ''"> and linkman = #{linkman} </if>
+		  		  <if test="contactNumber != null and contactNumber != ''"> and contact_number = #{contactNumber} </if>
+		  		  <if test="industry != null and industry != ''"> and industry = #{industry} </if>
+		  		  <if test="companySize != null and companySize != ''"> and company_size = #{companySize} </if>
+		  		  <if test="authenticationTag != null and authenticationTag != ''"> and authentication_tag = #{authenticationTag} </if>
+		  		  <if test="credentialsUrl != null and credentialsUrl != ''"> and credentials_url = #{credentialsUrl} </if>
+		  		  <if test="parentTag != null and parentTag != ''"> and parent_tag = #{parentTag} </if>
+		  		  <if test="contractIds != null and contractIds != ''"> and contract_ids = #{contractIds} </if>
+		  		  <if test="contractNames != null and contractNames != ''"> and contract_names = #{contractNames} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eps_cusotmer
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="linkman != null and linkman != ''"> and linkman = #{linkman} </if>
+		  		  <if test="contactNumber != null and contactNumber != ''"> and contact_number = #{contactNumber} </if>
+		  		  <if test="industry != null and industry != ''"> and industry = #{industry} </if>
+		  		  <if test="companySize != null and companySize != ''"> and company_size = #{companySize} </if>
+		  		  <if test="authenticationTag != null and authenticationTag != ''"> and authentication_tag = #{authenticationTag} </if>
+		  		  <if test="credentialsUrl != null and credentialsUrl != ''"> and credentials_url = #{credentialsUrl} </if>
+		  		  <if test="parentTag != null and parentTag != ''"> and parent_tag = #{parentTag} </if>
+		  		  <if test="contractIds != null and contractIds != ''"> and contract_ids = #{contractIds} </if>
+		  		  <if test="contractNames != null and contractNames != ''"> and contract_names = #{contractNames} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.project.eps.domain.CusotmerDO">
+		insert into eps_cusotmer
+		(
+			`id`, 
+			`name`, 
+			`address`, 
+			`linkman`, 
+			`contact_number`, 
+			`industry`, 
+			`company_size`, 
+			`authentication_tag`, 
+			`credentials_url`, 
+			`parent_tag`, 
+			`contract_ids`, 
+			`contract_names`, 
+			`user_id`, 
+			`status`, 
+			`update_time`, 
+			`create_time`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{address}, 
+			#{linkman}, 
+			#{contactNumber}, 
+			#{industry}, 
+			#{companySize}, 
+			#{authenticationTag}, 
+			#{credentialsUrl}, 
+			#{parentTag}, 
+			#{contractIds}, 
+			#{contractNames}, 
+			#{userId}, 
+			#{status}, 
+			#{updateTime}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.project.eps.domain.CusotmerDO">
+		update eps_cusotmer 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="linkman != null">`linkman` = #{linkman}, </if>
+			<if test="contactNumber != null">`contact_number` = #{contactNumber}, </if>
+			<if test="industry != null">`industry` = #{industry}, </if>
+			<if test="companySize != null">`company_size` = #{companySize}, </if>
+			<if test="authenticationTag != null">`authentication_tag` = #{authenticationTag}, </if>
+			<if test="credentialsUrl != null">`credentials_url` = #{credentialsUrl}, </if>
+			<if test="parentTag != null">`parent_tag` = #{parentTag}, </if>
+			<if test="contractIds != null">`contract_ids` = #{contractIds}, </if>
+			<if test="contractNames != null">`contract_names` = #{contractNames}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update eps_cusotmer set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update eps_cusotmer set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from eps_cusotmer where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eps_cusotmer where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

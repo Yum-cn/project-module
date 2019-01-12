@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.eps.dao.UserLocationDao">
+
+	<select id="get" resultType="com.project.eps.domain.UserLocationDO">
+		select `id`,`user_id`,`record_time`,`longitude`,`latitude`,`status` from eps_user_location where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.project.eps.domain.UserLocationDO">
+		select `id`,`user_id`,`record_time`,`longitude`,`latitude`,`status` from eps_user_location
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="recordTime != null and recordTime != ''"> and record_time = #{recordTime} </if>
+		  		  <if test="longitude != null and longitude != ''"> and longitude = #{longitude} </if>
+		  		  <if test="latitude != null and latitude != ''"> and latitude = #{latitude} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eps_user_location
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="recordTime != null and recordTime != ''"> and record_time = #{recordTime} </if>
+		  		  <if test="longitude != null and longitude != ''"> and longitude = #{longitude} </if>
+		  		  <if test="latitude != null and latitude != ''"> and latitude = #{latitude} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.project.eps.domain.UserLocationDO">
+		insert into eps_user_location
+		(
+			`id`, 
+			`user_id`, 
+			`record_time`, 
+			`longitude`, 
+			`latitude`, 
+			`status`
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{recordTime}, 
+			#{longitude}, 
+			#{latitude}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.project.eps.domain.UserLocationDO">
+		update eps_user_location 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="recordTime != null">`record_time` = #{recordTime}, </if>
+			<if test="longitude != null">`longitude` = #{longitude}, </if>
+			<if test="latitude != null">`latitude` = #{latitude}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update eps_user_location set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update eps_user_location set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from eps_user_location where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eps_user_location where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
